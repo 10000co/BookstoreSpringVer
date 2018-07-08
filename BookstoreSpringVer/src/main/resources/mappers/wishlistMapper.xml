@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.ksh.bookstore.dao.WishlistMapper">
+
+	<select id="selectOne" parameterType="Wishlist" resultType="int">
+		SELECT 
+			COUNT(*) 
+		FROM 
+			wishlist 
+		WHERE 
+			userid = #{userid} 
+		AND
+			bookcode = #{bookcode} 
+	</select>
+
+	<insert id="insertWishlist" parameterType="Wishlist">
+		INSERT INTO 
+			wishlist
+		VALUES
+		(
+			#{userid},
+			#{bookcode}
+		)
+	</insert>
+	
+	<select id="selectAll" parameterType="string" resultType="Wishlist">
+		SELECT 
+			userid,
+			bookcode 
+		FROM 
+			wishlist 
+		WHERE 
+			userid = #{userid} 
+		ORDER BY 
+			bookcode 
+	</select>
+	
+	<delete id="deleteWishlist" parameterType="Wishlist">
+		DELETE 
+			wishlist 
+		WHERE 
+			userid = #{userid} 
+		AND 
+			bookcode = #{bookcode} 
+	</delete>	
+
+</mapper>

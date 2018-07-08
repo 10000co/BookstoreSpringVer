@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.ksh.bookstore.dao.SaleMapper">
+
+	<insert id="insertBookSale" parameterType="Sale">
+		INSERT INTO 
+		sale
+		(
+			userid, 
+			bookcode, 
+			purchasecnt
+		)			 
+		VALUES
+		(
+			#{userid},
+			#{bookcode},
+			#{purchasecnt}
+		)
+	</insert>
+	
+	<update id="stockBookMinus" parameterType="Book">
+		UPDATE 
+			book 
+		SET 
+			quantity = quantity - #{quantity} 
+		WHERE 
+			bookcode = #{bookcode} 
+	</update>
+	
+	<select id="orderSelectAll" parameterType="string" resultType="Sale">
+		SELECT DISTINCT 
+		    TO_CHAR(A.PURCHASEDATE, 'YYYY/MM/DD') AS PURCHASEDATE, 
+		    B.BOOKCODE, 
+		    B.TITLE, 
+		    B.PRICE, 
+		    A.PURCHASECNT, 
+		    (B.PRICE * A.PURCHASECNT) AS total 
+		FROM 
+		    sale A, book B 
+		WHERE 
+		    B.BOOKCODE = A.BOOKCODE 
+		AND 
+			userid = #{userid} 
+		ORDER BY 
+		    PURCHASEDATE DESC 
+	</select>
+	
+	<select id="selectOrderOne" parameterType="Sale" resultType="int">
+		SELECT 
+			COUNT(*) 
+		FROM 
+			sale 
+		WHERE 
+			userid = #{userid} 
+		AND
+			bookcode = #{bookcode}
+	</select>
+	
+	<update id="updateOrderInfo" parameterType="Sale">
+		UPDATE 
+			sale 
+		SET 
+			purchasecnt = purchasecnt + #{purchasecnt} 
+		WHERE 
+			userid = #{userid} 
+		AND 
+			bookcode = #{bookcode} 
+	</update>
+	
+	<select id="selectPurchaseMost" resultType="Sale">
+		SELECT 
+		    A.bookcode, A.purchasecnt 
+		FROM 
+		    (
+		        SELECT 
+		        	bookcode, 
+		        	SUM(purchasecnt) AS purchasecnt 
+		        FROM 
+		        	sale 
+		        GROUP BY 
+		        	bookcode
+		    ) A,
+		    (
+		        SELECT 
+		        	MAX(SUM(purchasecnt)) AS purchasecnt 
+		        FROM 
+		        	sale 
+		        GROUP BY 
+		        	bookcode
+		    ) B
+		WHERE 
+		    A.purchasecnt = B.purchasecnt 
+	</select>
+
+</mapper>

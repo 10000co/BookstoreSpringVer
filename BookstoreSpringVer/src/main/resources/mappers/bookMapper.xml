@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.ksh.bookstore.dao.BookMapper">
+
+	<select id="selectBookList" resultType="Book">
+		SELECT * FROM book  
+	</select>
+	
+	<select id="selectBookInfo" parameterType="int" resultType="Book">
+		SELECT 
+			* 
+		FROM 
+			book 
+		WHERE 
+			bookcode = #{bookcode} 
+	</select>
+	
+	<select id="selectBestSeller" resultType="Book">
+		SELECT A.bookcode, B.quantity 
+		FROM 
+		    book A,
+		    (SELECT 
+		        MIN(quantity) AS quantity   
+		    FROM 
+		        book 
+		    ) B
+		WHERE 
+		    A.quantity = B.quantity
+		ORDER BY 
+		    A.bookcode			
+	</select>
+
+</mapper>

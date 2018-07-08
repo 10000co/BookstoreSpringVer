@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.ksh.bookstore.dao.ShopmemberMapper">
+
+	<insert id="insertShopmember" parameterType="Shopmember">
+		INSERT INTO 
+			shopmember 
+		VALUES(
+			#{userid}, #{password}, #{username}, #{address}, #{phone}
+		)
+	</insert>
+	
+	<select id="selectShopmember" parameterType="Shopmember" resultType="Shopmember">
+		SELECT 
+			userid, password, username, address, phone 
+		FROM 
+			shopmember 
+		WHERE 
+			userid = #{userid} 
+			AND
+			password = #{password}
+	</select>
+
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+
+	<!--  oracle null 처리  -->
+    <settings>
+        <setting name="cacheEnabled" value="false" />
+        <setting name="jdbcTypeForNull" value="NULL" />
+    </settings>
+	
+	<typeAliases>
+		<typeAlias type="com.ksh.bookstore.vo.Book" alias="Book"/>
+		<typeAlias type="com.ksh.bookstore.vo.Sale" alias="Sale"/>
+		<typeAlias type="com.ksh.bookstore.vo.Shopmember" alias="Shopmember"/>
+		<typeAlias type="com.ksh.bookstore.vo.Wishlist" alias="Wishlist"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mappers/bookMapper.xml" />
+		<mapper resource="mappers/saleMapper.xml" />
+		<mapper resource="mappers/shopmemberMapper.xml" />
+		<mapper resource="mappers/wishlistMapper.xml" />
+	</mappers>
+	
+</configuration>
