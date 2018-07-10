@@ -10,7 +10,7 @@
 <link href="css/index.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-	<h2>[ 온라인 서점 ]</h2>
+	<h2>[ 온라인 서점 ]</h2> 
 	
 	<input id="userid" type="hidden" value="${sessionScope.loginId}" />	
 				
