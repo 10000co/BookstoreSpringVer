@@ -24,7 +24,7 @@
 				<tr>
 					<td>${book.bookcode}</td>
 					<td id="content">
-						<a href="javascript:bookRead(${book.bookcode})">${book.title}</a>
+						<a href="location.href=bookInfo?bookcode=${book.bookcode}">${book.title}</a>
 					</td>
 				</tr>
 			</c:forEach>
