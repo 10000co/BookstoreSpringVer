@@ -11,7 +11,7 @@
 </head>
 <body>
 	<h2>[ 온라인 서점 ]</h2> 
-	
+	 
 	<input id="userid" type="hidden" value="${sessionScope.loginId}" />	
 				
 	<ul>
