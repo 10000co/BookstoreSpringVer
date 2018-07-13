@@ -45,37 +45,42 @@ public class BookController {
 		List<Book> book = repository_book.selectBestSeller();
 		List<Sale> most = repository_sale.selectPurchaseMost();
 		
-		for(int i=0; i<book.size(); i++) {
-			switch(book.get(i).getBookcode()) {
-				case 1 : 
-					book.get(i).setTitle("Java 1.9 따라하기");
-					book.get(i).setPrice(10000);
-					book.get(i).setQuantity(most.get(0).getPurchasecnt());
-					break;
-				case 2 :
-					book.get(i).setTitle("C로 배우는 자료구조");
-					book.get(i).setPrice(12000);
-					book.get(i).setQuantity(most.get(0).getPurchasecnt());
-					break;
-				case 3 :
-					book.get(i).setTitle("HTML5_CSS");
-					book.get(i).setPrice(9000);
-					book.get(i).setQuantity(most.get(0).getPurchasecnt());
-					break;
-				case 4 :
-					book.get(i).setTitle("자바 디자인 패턴");
-					book.get(i).setPrice(15000);
-					book.get(i).setQuantity(most.get(0).getPurchasecnt());
-					break;
-				case 5 :
-					book.get(i).setTitle("안드로이드 프로그래밍");
-					book.get(i).setPrice(20000);
-					book.get(i).setQuantity(most.get(0).getPurchasecnt());
-					break;
+		if(most.size() > 0) {
+			for(int i=0; i<book.size(); i++) {
+				switch(book.get(i).getBookcode()) {
+					case 1 : 
+						book.get(i).setTitle("Java 1.9 따라하기");
+						book.get(i).setPrice(10000);					
+						book.get(i).setQuantity(most.get(0).getPurchasecnt());
+						break;
+					case 2 :
+						book.get(i).setTitle("C로 배우는 자료구조");
+						book.get(i).setPrice(12000);
+						book.get(i).setQuantity(most.get(0).getPurchasecnt());
+						break;
+					case 3 :
+						book.get(i).setTitle("HTML5_CSS");
+						book.get(i).setPrice(9000);
+						book.get(i).setQuantity(most.get(0).getPurchasecnt());
+						break;
+					case 4 :
+						book.get(i).setTitle("자바 디자인 패턴");
+						book.get(i).setPrice(15000);
+						book.get(i).setQuantity(most.get(0).getPurchasecnt());
+						break;
+					case 5 :
+						book.get(i).setTitle("안드로이드 프로그래밍");
+						book.get(i).setPrice(20000);
+						book.get(i).setQuantity(most.get(0).getPurchasecnt());
+						break;
+				}
 			}
-		}
 		
-		model.addAttribute("book", book);
+			model.addAttribute("book", book);
+		}
+		else {
+			model.addAttribute("book", null);
+		}
 		
 		return "sale/bestSeller";
 	}

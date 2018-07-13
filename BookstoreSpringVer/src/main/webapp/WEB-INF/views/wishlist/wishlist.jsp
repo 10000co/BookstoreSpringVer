@@ -18,7 +18,8 @@
 			<th>가격</th>
 			<th>관심상품 삭제하기</th>
 		</tr>
-		<c:if test="${not empty booklist}">
+<%-- 		<c:if test="${not empty booklist}"> --%>
+		<c:if test="${booklist != null}">
 			<c:forEach var="wishlist" items="${booklist}" >
 				<tr>
 					<td>${wishlist.bookcode}</td>
